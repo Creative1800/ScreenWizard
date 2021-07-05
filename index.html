@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Screen Wizard</title>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+</head>
+<body onload="calculate()">
+    <div class="container-lg container-md">
+        <div class="header mb-3 mt-5">
+            <h2 class="text-uppercase font-weight-bold text-center text-secondary mb-3">screen size (<span class="text-success">xf 1.5</span>)</h2>
+            <h4 class="text-center text-secondary font-weight-light font-weight-300">
+                Specify number of cabinets horizontally and vertically to calculate your final screen size. 
+                Scroll down to see screen calculation details and product specification. Click on next step button and continue.
+            </h4>
+        </div>
+            
+        <div class="container-lg row my-5 mx-auto">
+            <div class="col-lg-3 col-md-6">
+                <label class="text-secondary mb-1" for="cabinets-horizontally">Cabinets Horizontally</label>
+                <div class="input-group  bootstrap-touchspin bootstrap-touchspin-injected mb-4">
+                    <input  type="text" class="form-control" id="cabinets-horizontally" value="5" min="1" max="300" onchange="calculate()">
+                    <span class="input-group-btn-vertical button-span" role="group">
+                        <button class="btn btn-primary blue-bg blue-border up-down-button" id="plusOneBtn" type="button" onclick="plusMinusOne('plus', 'cabinets-horizontally'); calculate()">+</button>
+                        <button class="btn btn-primary blue-bg blue-border up-down-button" id="minusOneBtn" type="button" onclick="plusMinusOne('minus', 'cabinets-horizontally'); calculate()">-</button>
+                    </span>
+                </div>
+
+                <label class="text-secondary mb-1" for="cabinets-vertically">Cabinets Vertically</label>
+                <div class="input-group  bootstrap-touchspin bootstrap-touchspin-injected mb-4">
+                    <input class="form-control" type="text" id="cabinets-vertically" value="4" min="1" max="300" onchange="calculate()">
+                    <span class="input-group-btn-vertical button-span" >
+                        <button class="btn btn-primary bootstrap-touchspin-up blue-bg blue-border up-down-button" id="plusOneBtn"  onclick="plusMinusOne('plus', 'cabinets-vertically'); calculate()">+</button>
+                        <button class="btn btn-primary bootstrap-touchspin-down blue-bg blue-border up-down-button" id="minusOneBtn" onclick="plusMinusOne('minus', 'cabinets-vertically'); calculate()">-</button>
+                    </span>
+                </div>
+            </div>    
+            <div class="col-lg-4 col-md-6 mx-auto mb-5">
+                <p class="mb-0"><small class="small">Size: <span class="text-success" id="widthOfDisplay"></span> x <span class="text-success" id="heightOfDisplay"></span> m</small></p>
+                <p class="my-0"><small class="small">Sqm: <span class="text-success" id="sqmOfDisplay"></span> m</small></p>
+                <p class="my-0"><small class="small">Resolution: <span class="text-success" id="screenWidthInPixels"></span> x <span class="text-success" id="screenHeightInPixels"></span> px (<span class="text-success" id="totalCountOfPixel">1 658 880</span> px)</small></p>
+                <p class="my-0"><small class="small">Aspect Ratio: <span class="text-success"></span>(<span class="text-success" id="aspectRatioDecimal"></span>)</small></p>
+                <p class="my-0"><small class="small">Screen Diagonal: <span class="text-success" id="screenDiagonal"></span> m</small></p>
+                <p class="my-0"><small class="small">Pixel Pitch: <span class="text-success" id="pixelPitch">1.563 x 1.563</span> mm</small></p>
+                <p class="my-0"><small class="small">Weight: <span class="text-success" id="weightOfDisplay"></span> kg</small></p>
+                <p class="my-0"><small class="small">Typical Cunsumption: <span class="text-success" id="typicalConsumption"></span> (kW)</small></p>
+                <p class="my-0"><small class="small">Max Consumption: <span class="text-success" id="maxConsumption"></span> (kW)</small></p>
+            </div>
+
+            <div id="carouselExampleDark" class="carousel carousel-dark slide col-lg-3 col-md-8 m-auto" data-bs-ride="carousel">
+                <div class="carousel-indicators">
+                  <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                  <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                  <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="2" aria-label="Slide 3"></button>
+                </div>
+                <div class="carousel-inner">
+                  <div class="carousel-item active" data-bs-interval="10000">
+                    <img src="pics/XF_SMPP_01.jpg" class="d-block w-100 mb-5 px-3" alt="Product number 1">
+                    <div class="carousel-caption d-none d-md-block">
+                    </div>
+                  </div>
+                  <div class="carousel-item" data-bs-interval="3000">
+                    <img src="pics/XF_SMPP_02.jpg" class="d-block w-100 mb-5 px-3" alt="Product number 2">
+                    <div class="carousel-caption d-none d-md-block">
+                    </div>
+                  </div>
+                  <div class="carousel-item">
+                    <img src="pics/XF_SMPP_03.jpg" class="d-block w-100 mb-5 px-3" alt="Product number 3">
+                    <div class="carousel-caption d-none d-md-block">
+                    </div>
+                  </div>
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="prev">
+                  <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                  <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="next">
+                  <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                  <span class="visually-hidden">Next</span>
+                </button>
+              </div>
+            
+        </div>
+
+        <div class="text-center mb-5">
+            <div class="mb-2">
+                <button class="blue-btn py-2 px-3 mb-3" id="screen-configuration"  onclick="toggle('screen-config','prod-spec', 'screen-configuration', 'product-specification');">Screen configuration</button>    
+                <button class="gray-btn py-2 px-3" id="product-specification" onclick="toggle('prod-spec', 'screen-config', 'product-specification', 'screen-configuration')">Product specification</button>    
+            </div>
+            <p>Click on Screen claculation or Product specification to change view.</p>
+            <hr class="devider">
+        </div>
+
+        <div class="tab-content g-pt-20 text-left mb-5 " id="screen-config" style="display: block;">
+            <div class="tab-pane fade show active">
+                <div class="row m-t-md">
+                    <div class="col-lg-6">
+                        <div class="card rounded-0 mb-5 ">
+                            <h3 class="card-header rounded-0 blue-bg text-white font-size-1-1 py-2">LED (PIXEL)</h3>
+                            <div class="table-responsive-sm p-2">
+                                <table class="table table-striped border-grey mb-0">
+                                    <tbody >
+                                        <tr class="d-flex">
+                                            <td class="col-7">Pixel pitch width x height (mm)</td>
+                                            <td class="col-5">1.5625 x 15625</td>
+                                        </tr>
+                                        <tr class="d-flex">
+                                            <td class="col-7">LED Type</td>
+                                            <td class="col-5">SMD1010</td>
+                                        </tr>
+                                        <tr class="d-flex">
+                                            <td class="col-7">Pixel density (pixel/m<sup>2</sup>)</td>
+                                            <td class="col-5">409600</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="card  rounded-0 mb-5">
+                            <h3 class="card-header rounded-0 mb-0 blue-bg text-white font-size-1-1 py-2">MODULE</h3>
+                            <div class="table-responsive-sm p-2">
+                                <table class="table table-striped border-grey mb-0">
+                                    <tbody>
+                                        <tr class="d-flex">
+                                            <td class="col-7">Modul Width x Height (mm)</td>
+                                            <td class="col-5">300.00 x 168.75</td>
+                                        </tr>
+                                        <tr class="d-flex">
+                                            <td class="col-7">Moduls in cabinet Horizontally (pcs)</td>
+                                            <td class="col-5">2</td>
+                                        </tr>
+                                        <tr class="d-flex">
+                                            <td class="col-7">Moduls in cabinet Vertically (pcs)</td>
+                                            <td class="col-5">2</td>
+                                        </tr>
+                                        <tr class="d-flex">
+                                            <td class="col-7">Total Moduls in cabinet (pcs)</td>
+                                            <td class="col-5">4</td>
+                                        </tr>
+                                        <tr class="d-flex">
+                                            <td class="col-7">Module resolution (horiz x vert px)</td>
+                                            <td class="col-5">192 x 108</td>
+                                        </tr>
+                                        <tr class="d-flex">
+                                            <td class="col-7">Module resolution (px)</td>
+                                            <td class="col-5">20736</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="card brd-primary rounded-0 mb-3">
+                            <h3 class="card-header rounded-0 mb-0 blue-bg text-white font-size-1-1 py-2">LED (PIXEL)</h3>
+                            <div class="table-responsive-sm p-2">
+                                <table class="table table-striped border-grey mb-0">
+                                    <tbody>
+                                        <tr class="d-flex">
+                                            <td class="col-7">Cabinet Width x Height x Depth (mm)</td>
+                                            <td class="col-5">600.00 x 337.50 x 58.00</td>
+                                        </tr>
+                                        <tr class="d-flex">
+                                            <td class="col-7">Cabinet resolution (horiz x vert px)</td>
+                                            <td class="col-5">384 x 216</td>
+                                        </tr>
+                                        <tr class="d-flex">
+                                            <td class="col-7"></td>
+                                            <td class="col-5">82944</td>
+                                        </tr>
+                                        <tr class="d-flex last-table-child">
+                                            <td class="font-size-0-95"><i class="fas fa-ban"></i>&nbsp;&nbsp;&nbsp;<span class="blue-color">Login</span> or <span class="blue-color">Signup</span> if you want to see more details.</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="card rounded-0 g-mb-30">
+                            <h3 class="card-header blue-bg text-white rounded-0 px-3 mb-0 font-size-1-1 py-2">SCREEN</h3>
+                            <div class="table-responsive-sm p-2">
+                                <table class="table table-striped border-grey mb-0">
+                                    <tbody>
+                                        <tr class="d-flex">
+                                            <td class="col-7">Screen Width (m)</td>
+                                            <td class="col-5" id="screenWidthM"></td>
+                                        </tr>
+                                        <tr class="d-flex">
+                                            <td class="col-7">Screen Height (m)</td>
+                                            <td class="col-5" id="screenHeightM"></td>
+                                        </tr>
+                                        <tr class="d-flex">
+                                            <td class="col-7">Screen Width (ft)</td>
+                                            <td class="col-5" id="screenWidthFt"></td>
+                                        </tr>
+                                        <tr class="d-flex">
+                                            <td class="col-7">Screen Height (ft)</td>
+                                            <td class="col-5" id="screenHeightFt"></td>
+                                        </tr>
+                                        <tr class="d-flex">
+                                            <td class="col-7">Screen Width (in)</td>
+                                            <td class="col-5" id="screenWidthIn"></td>
+                                        </tr>
+                                        <tr class="d-flex">
+                                            <td class="col-7">Screen Height (in)</td>
+                                            <td class="col-5" id="screenHeightIn"></td>
+                                        </tr>
+                                        <tr class="d-flex">
+                                            <td class="col-7">Screen Area (m<sup>2</sup>)</td>
+                                            <td class="col-5" id="screenAreaM2"></td>
+                                        </tr>
+                                        <tr class="d-flex">
+                                            <td class="col-7">Screen Area (ft<sup>2</sup>)</td>
+                                            <td class="col-5" id="screenAreaFt2"></td>
+                                        </tr>
+                                        <tr class="d-flex">
+                                            <td class="col-7">Diagonal Display Size (m)</td>
+                                            <td class="col-5" id="diagonalDispSizeM"></td>
+                                        </tr>
+                                        <tr class="d-flex">
+                                            <td class="col-7">Diagonal Display Size (in)v</td>
+                                            <td class="col-5" id="diagonalDispSizeIn"></td>
+                                        </tr>
+                                        <tr class="d-flex">
+                                            <td class="col-7">Aspect ratio</td>
+                                            <td class="col-5" id="aspectRatio"><span id="aspectRatioInDecimal"></span></td>
+                                        </tr>
+                                        <tr class="d-flex">
+                                            <td class="col-7">Cabinets Horizontally (pcs)</td>
+                                            <td class="col-5" id="cabinetsHorizontally"></td>
+                                        </tr>
+                                        <tr class="d-flex">
+                                            <td class="col-7">Cabinets Vertically (pcs)</td>
+                                            <td class="col-5" id="cabinetsVertically"></td>
+                                        </tr>
+                                        <tr class="d-flex">
+                                            <td class="col-7">Total Cabinets for screen (pcs)</td>
+                                            <td class="col-5" id="totalCabinets"></td>
+                                        </tr>
+                                        <tr class="d-flex">
+                                            <td class="col-7">Screen Horizontal Resolution (px)</td>
+                                            <td class="col-5" id="screenHorRes"></td>
+                                        </tr>
+                                        <tr class="d-flex">
+                                            <td class="col-7">Screen Vertical Resolution (px)v</td>
+                                            <td class="col-5" id="screenVerRes"></td>
+                                        </tr>
+                                        <tr class="d-flex">
+                                            <td class="col-7">Screen Total Resolution (px)</td>
+                                            <td class="col-5" id="screenTotRes"></td>
+                                        </tr>
+                                        <tr class="d-flex">
+                                            <td class="col-7">Estimated Screen Weight (kg)</td>
+                                            <td class="col-5" id="screenWeightKg"></td>
+                                        </tr>
+                                        <tr class="d-flex">
+                                            <td class="col-7">Estimated Screen Weight (lb)</td>
+                                            <td class="col-5" id="screenWeightLb"></td>
+                                        </tr>
+                                        <tr class="d-flex">
+                                            <td class="col-7">Estimated Screen Gross Weight (kg)</td>
+                                            <td class="col-5" id="screenGrossWeightKg"></td>
+                                        </tr>
+                                        <tr class="d-flex">
+                                            <td class="col-7">Estimated Screen Gross Weight (lb)</td>
+                                            <td class="col-5" id="screenGrossWeightLb"></td>
+                                        </tr>
+                                        <tr class="d-flex last-table-child ">
+                                            <td class="font-size-0-95"><i class="fas fa-ban"></i>&nbsp;&nbsp;&nbsp;<span class="blue-color">Login</span> or <span class="blue-color">Signup</span> if you want to see more details.</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="prod-spec" class="mb-5" style="display: none;">
+            <div class="card brd-primary rounded-0 mb-3">
+                <h3 class="card-header rounded-0 mb-0 blue-bg text-white font-size-1-1 py-2">Product specification</h3>
+                <div class="table-responsive-sm p-2">
+                    <table class="table table-striped border-grey mb-0">
+                        <tbody>
+                            <tr class="d-flex">
+                                <td class="col-7">ID of product option</td>
+                                <td class="col-5">185</td>
+                            </tr>
+                            <tr class="d-flex">
+                                <td class="col-7">LED Type</td>
+                                <td class="col-5">SMD1010</td>
+                            </tr>
+                            <tr class="d-flex">
+                                <td class="col-7">Pixel Pitch (Width) </td>
+                                <td class="col-5">1.5625</td>
+                            </tr>
+                            <tr class="d-flex">
+                                <td class="col-7">Cabinet resolution (W/Pixel)</td>
+                                <td class="col-5">384</td>
+                            </tr>
+                            <tr class="d-flex">
+                                <td class="col-7">Module resolution (W/Pixel)</td>
+                                <td class="col-5">192</td>
+                            </tr>
+                            <tr class="d-flex">
+                                <td class="col-7">Cabinet Dimension Width (mm)</td>
+                                <td class="col-5">600.00</td>
+                            </tr>
+                            <tr class="d-flex">
+                                <td class="col-7">Cabinet Dimension Depth (mm)</td>
+                                <td class="col-5">58.00</td>
+                            </tr>
+                            <tr class="d-flex">
+                                <td class="col-7">Module Dimension Width (mm)</td>
+                                <td class="col-5">300.00</td>
+                            </tr>
+                            <tr class="d-flex">
+                                <td class="col-7">Panel material</td>
+                                <td class="col-5">Die-casting Aluminum</td>
+                            </tr>
+                            <tr class="d-flex">
+                                <td class="col-7">Cabinet weight (kg)</td>
+                                <td class="col-5">6.80</td>
+                            </tr>
+                            <tr class="d-flex">
+                                <td class="col-7">Color processing (bit)</td>
+                                <td class="col-5">16</td>
+                            </tr>
+                            <tr class="d-flex">
+                                <td class="col-7">Optimal Horizontal Viewing Angle (°)</td>
+                                <td class="col-5">160</td>
+                            </tr>
+                            <tr class="d-flex">
+                                <td class="col-7">AC Input Frequency (Hz)</td>
+                                <td class="col-5">50~60Hz</td>
+                            </tr>
+                            <tr class="d-flex">
+                                <td class="col-7">Power Consumption Typical (W/m2) </td>
+                                <td class="col-5">170</td>
+                            </tr>
+                            <tr class="d-flex">
+                                <td class="col-7">Lifetime Typical Value (hrs)</td>
+                                <td class="col-5">≥100000</td>
+                            </tr>
+                            <tr class="d-flex">
+                                <td class="col-7">Market solution</td>
+                                <td class="col-5" style="height: 2em; overflow: hidden;">BROADCAST|COMMAND & CONTROL|CONFERENCE & MEETING ROOMS|CREATIVE DESIGN|RETAIL|THEATER</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+<!--     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>           
+ -->
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/script.js"></script>
+</body>
+</html>
